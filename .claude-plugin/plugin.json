@@ -1,0 +1,10 @@
+{
+  "name": "smalldragon-skills",
+  "version": "1.0.0",
+  "description": "Personal Claude Code skills by SmallDragon11, including session progress save/load for seamless handoff between sessions.",
+  "author": {
+    "name": "SmallDragon11"
+  },
+  "repository": "https://github.com/SmallDragon11/smalldragon-skills",
+  "license": "MIT"
+}

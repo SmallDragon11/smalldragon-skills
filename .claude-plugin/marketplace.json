@@ -1,0 +1,13 @@
+{
+  "name": "smalldragon-skills",
+  "owner": {
+    "name": "SmallDragon11"
+  },
+  "plugins": [
+    {
+      "name": "smalldragon-skills",
+      "source": "./",
+      "description": "Personal Claude Code skills, including session progress save/load."
+    }
+  ]
+}
