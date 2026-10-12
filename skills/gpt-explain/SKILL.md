@@ -12,7 +12,7 @@ The user wants a second explanation written by Codex (GPT), because they sometim
 
 ## 1. Decide the mode
 
-- **No arguments** (`$ARGUMENTS` is empty): the subject is **your most recent reply to the user** before this command was invoked (the last assistant message the user saw, not a tool call or this skill's own output).
+- **No arguments** (`$ARGUMENTS` is empty): the subject is **your most recent reply to the user** before this command was invoked (the last assistant message the user saw, not a tool call or this skill's own output). Also collect the context that reply depends on: the user message that prompted it (verbatim), plus any code, errors, command output, or earlier replies it refers to.
 - **Arguments given**: the subject is what the user wrote in `$ARGUMENTS`. Collect the parts of this session that relate to it: relevant user questions, your replies, code snippets, error messages, file paths, command output, decisions made.
 
 ## 2. Build the brief
@@ -31,7 +31,7 @@ They found the original explanation hard to follow and want a clearer one from y
 <background: what the user is working on, the project/language, what led up to this — a few sentences>
 
 ## Material
-<no-args mode: your last reply, VERBATIM — copy it in full, do not summarize or rephrase>
+<no-args mode: first the user message that prompted your last reply, verbatim; then the excerpts that reply depends on — quote code, errors, and earlier replies verbatim where they matter; then your last reply itself, VERBATIM — copy it in full, do not summarize or rephrase. Label each part clearly.>
 <args mode: the relevant excerpts — quote code, errors, and earlier replies verbatim where they matter>
 
 ## How to answer
