@@ -68,6 +68,6 @@ What we are trying to achieve overall, and the definition of done.
 - Write for a reader with no context; do not reference "above" or "earlier in the chat".
 - Never include secrets (API keys, tokens, passwords).
 - Keep it concise — aim for something readable in under a minute.
-- If the user passed an argument ($ARGUMENTS), incorporate it as a note in the relevant section.
+- If the user supplied a note when invoking this skill (`$ARGUMENTS` in Claude Code, or any text given alongside the invocation), incorporate it in the relevant section.
 
 After writing, tell the user the file path and give a 2–3 line summary of what was recorded.

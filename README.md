@@ -1,10 +1,10 @@
 # smalldragon-skills
 
-A collection of personal [Claude Code](https://claude.com/claude-code) skills.
+A collection of personal skills for [Claude Code](https://claude.com/claude-code) and [Codex](https://github.com/openai/codex).
 
 ## Install
 
-In Claude Code:
+### Claude Code
 
 ```
 /plugin marketplace add SmallDragon11/smalldragon-skills
@@ -13,11 +13,29 @@ In Claude Code:
 
 Update later with `/plugin marketplace update smalldragon-skills`.
 
+### Codex
+
+Codex reads skills from `~/.agents/skills/`. Clone this repo and link (or copy) each skill folder there:
+
+```powershell
+git clone https://github.com/SmallDragon11/smalldragon-skills.git
+New-Item -ItemType Junction -Path "$HOME\.agents\skills\save-progress" -Target "<repo>\skills\save-progress"
+New-Item -ItemType Junction -Path "$HOME\.agents\skills\load-progress" -Target "<repo>\skills\load-progress"
+```
+
+```bash
+# macOS / Linux
+ln -s "<repo>/skills/save-progress" ~/.agents/skills/save-progress
+ln -s "<repo>/skills/load-progress" ~/.agents/skills/load-progress
+```
+
+Invoke with `$save-progress` / `$load-progress` (or pick from `/skills`). Update with `git pull`.
+
 ## Skills
 
-| Command | Description |
+| Command (Claude Code / Codex) | Description |
 |---|---|
-| `/smalldragon-skills:save-progress [note]` | Save the current session's progress to `.claude/PROGRESS.md` in the project, so a new session can resume seamlessly. |
-| `/smalldragon-skills:load-progress [path]` | Load `.claude/PROGRESS.md`, verify it against the current project state, and propose the next step. Waits for confirmation before changing anything. |
+| `/smalldragon-skills:save-progress [note]`<br>`$save-progress [note]` | Save the current session's progress to `.claude/PROGRESS.md` in the project, so a new session can resume seamlessly. |
+| `/smalldragon-skills:load-progress [path]`<br>`$load-progress [path]` | Load `.claude/PROGRESS.md`, verify it against the current project state, and propose the next step. Waits for confirmation before changing anything. |
 
-Both skills are manual-only (`disable-model-invocation: true`); Claude will not run them on its own.
+Both skills are manual-only: `disable-model-invocation: true` for Claude Code, and `agents/openai.yaml` with `allow_implicit_invocation: false` for Codex. Neither agent will run them on its own.

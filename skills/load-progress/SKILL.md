@@ -11,7 +11,7 @@ Restore context from a previous session's handoff file and get ready to continue
 
 ## Steps
 
-1. Read the progress file: `$ARGUMENTS` if a path was given, otherwise `.claude/PROGRESS.md` under the current working directory.
+1. Read the progress file: the path the user gave when invoking this skill (`$ARGUMENTS` in Claude Code, or any path mentioned alongside the invocation), otherwise `.claude/PROGRESS.md` under the current working directory.
    - If it does not exist, say so and stop. Suggest running `/save-progress` in the previous session next time.
 2. Verify the file against reality — the state may have changed since it was written:
    - If this is a git repo: `git status --short`, `git log --oneline -5`, current branch.
