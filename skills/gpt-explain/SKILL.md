@@ -31,8 +31,19 @@ They found the original explanation hard to follow and want a clearer one from y
 <background: what the user is working on, the project/language, what led up to this — a few sentences>
 
 ## Material
-<no-args mode: first the user message that prompted your last reply, verbatim; then the excerpts that reply depends on — quote code, errors, and earlier replies verbatim where they matter; then your last reply itself, VERBATIM — copy it in full, do not summarize or rephrase. Label each part clearly.>
-<args mode: the relevant excerpts — quote code, errors, and earlier replies verbatim where they matter>
+<!-- no-args mode: use these three subsections -->
+### The user's message that led to the reply
+<user message>
+
+### Related context the reply refers to
+<code, errors, command output, earlier replies>
+
+### The assistant reply to explain
+<the full reply>
+
+<!-- args mode: use this subsection instead -->
+### Relevant excerpts from the session
+<user questions, assistant replies, code, errors, command output>
 
 ## How to answer
 - Reply in <the language the user has been using in this session, e.g. Traditional Chinese (繁體中文)>.
@@ -43,7 +54,8 @@ They found the original explanation hard to follow and want a clearer one from y
 ```
 
 Rules for the brief:
-- **Verbatim, not paraphrased.** The point is a second opinion from a different model; your rewording would bias it. Quote the original text and code.
+- Fill each `<...>` placeholder and drop the HTML comments and the subsections for the other mode. The finished brief is read by Codex, so it must contain only Codex-facing text.
+- **Verbatim, not paraphrased.** The point is a second opinion from a different model; your rewording would bias it. Copy the user's messages, code, errors, and earlier replies as they appeared. In no-args mode, copy your last reply in full.
 - Include enough background that a reader with zero context can understand, but leave out unrelated parts of the session.
 - Never include secrets (API keys, tokens, passwords, `.env` contents). Redact them as `<redacted>`.
 
