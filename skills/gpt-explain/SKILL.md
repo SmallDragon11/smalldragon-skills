@@ -55,7 +55,7 @@ They found the original explanation hard to follow and want a clearer one from y
 
 Rules for the brief:
 - Fill each `<...>` placeholder and drop the HTML comments and the subsections for the other mode. The finished brief is read by Codex, so it must contain only Codex-facing text.
-- **Verbatim, not paraphrased.** The point is a second opinion from a different model; your rewording would bias it. Copy the user's messages, code, errors, and earlier replies as they appeared. In no-args mode, copy your last reply in full.
+- **Copy verbatim, don't paraphrase** — Codex should explain the original, not your rewording of it. This covers the user's messages, code, errors, and earlier replies; in no-args mode, copy your last reply in full.
 - Include enough background that a reader with zero context can understand, but leave out unrelated parts of the session.
 - Never include secrets (API keys, tokens, passwords, `.env` contents). Redact them as `<redacted>`.
 
