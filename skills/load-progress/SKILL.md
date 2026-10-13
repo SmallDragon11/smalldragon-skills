@@ -1,30 +1,12 @@
 ---
 name: load-progress
-description: Load .claude/PROGRESS.md saved by /save-progress and resume work from where the previous session left off.
-disable-model-invocation: true
+description: Pick up the handoff document saved by /save-progress and resume the work.
 argument-hint: "[optional path to progress file]"
+disable-model-invocation: true
 ---
 
-# Load Progress
+Read the handoff document at `.claude/PROGRESS.md` under the project root, or at the path the user passed. If it is missing, say so and stop.
 
-Restore context from a previous session's handoff file and get ready to continue.
+The document is a snapshot: check it against the current state (git status and log, the files and artifacts it references) and note any drift. Treat decisions it records as settled unless the user reopens them.
 
-## Steps
-
-1. Read the progress file: the path the user gave when invoking this skill (`$ARGUMENTS` in Claude Code, or any path mentioned alongside the invocation), otherwise `.claude/PROGRESS.md` under the current working directory.
-   - If it does not exist, say so and stop. Suggest running `/save-progress` in the previous session next time.
-2. Verify the file against reality — the state may have changed since it was written:
-   - If this is a git repo: `git status --short`, `git log --oneline -5`, current branch.
-   - Check that the key files listed still exist; skim the ones relevant to "In progress" and "Next steps".
-   - Done when every "In progress" and "Next steps" item is marked **confirmed**, **already done**, or **unclear**, and any files missing or new uncommitted changes are noted.
-3. Report to the user, in the language the progress file is written in:
-   - Goal and current status (brief)
-   - Any discrepancies found in step 2
-   - The proposed next step (first item of "Next steps"), plus any open questions
-4. End your turn after the report; start work once the user confirms.
-
-## Rules
-
-- Treat "Decisions & rationale" as settled; reopen one only when the user asks.
-- Treat "Dead ends / gotchas" as things to avoid.
-- The progress file is read-only during loading.
+Report the goal, where things stand, any drift, and the proposed next step. Wait for the user to confirm before changing anything.

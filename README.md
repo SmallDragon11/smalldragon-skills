@@ -35,8 +35,8 @@ Invoke with `$save-progress` / `$load-progress` (or pick from `/skills`). Update
 
 | Command (Claude Code / Codex) | Description |
 |---|---|
-| `/smalldragon-skills:save-progress [note]`<br>`$save-progress [note]` | Save the current session's progress to `.claude/PROGRESS.md` in the project, so a new session can resume seamlessly. |
-| `/smalldragon-skills:load-progress [path]`<br>`$load-progress [path]` | Load `.claude/PROGRESS.md`, verify it against the current project state, and propose the next step. Waits for confirmation before changing anything. |
+| `/smalldragon-skills:save-progress [next focus]`<br>`$save-progress [next focus]` | Compact the current session into a handoff document at `.claude/PROGRESS.md` in the project, so a new session can resume seamlessly. |
+| `/smalldragon-skills:load-progress [path]`<br>`$load-progress [path]` | Pick up `.claude/PROGRESS.md`, check it against the current project state, and propose the next step. Waits for confirmation before changing anything. |
 | `/smalldragon-skills:gpt-explain [topic]`<br>(Claude Code only) | Send relevant session context to Codex (`codex exec`, read-only) and show GPT's explanation. With no argument, explains Claude's most recent reply. Requires the Codex CLI installed and logged in. |
 
 All skills are manual-only: `disable-model-invocation: true` for Claude Code, and `agents/openai.yaml` with `allow_implicit_invocation: false` for Codex. Neither agent will run them on its own.

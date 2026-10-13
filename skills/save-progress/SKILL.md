@@ -1,72 +1,16 @@
 ---
 name: save-progress
-description: Save the current session's work progress to .claude/PROGRESS.md so a new session can resume seamlessly.
+description: Compact the current conversation into a handoff document at .claude/PROGRESS.md for /load-progress to pick up.
+argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
-argument-hint: "[optional note to include]"
 ---
 
-# Save Progress
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to `.claude/PROGRESS.md` under the project root. If it already exists, read it first and carry forward whatever is still relevant.
 
-Write a handoff file that lets a fresh session (with zero memory of this conversation) continue the work immediately.
+Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
-## Location
+Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-- Target file: `.claude/PROGRESS.md` under the current working directory (the project root).
-- If the file already exists, Read it first. Rewrite it as one up-to-date document: merge still-relevant content, drop what is obsolete.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-## Gather facts first
-
-Before writing, collect concrete state instead of relying on recollection alone:
-- If this is a git repo: `git status --short`, `git diff --stat`, `git log --oneline -10`, current branch.
-- Files created or modified during this session (from the conversation).
-- Any commands needed to build / run / test that were used this session.
-- The user's note, if one was supplied with the invocation (`$ARGUMENTS` in Claude Code, or any text given alongside it): fold it into the relevant section.
-
-## Content
-
-Write in the same language the user has been using in this session. Use this structure; omit a section only if it truly has nothing:
-
-```markdown
-# Progress — <project or task name>
-
-_Last updated: <YYYY-MM-DD HH:MM>_
-
-## Goal
-What we are trying to achieve overall, and the definition of done.
-
-## Status summary
-2–4 sentences: where things stand right now.
-
-## Done
-- Completed items (with file paths where relevant)
-
-## In progress
-- What was being worked on when the session stopped, and how far it got
-
-## Next steps
-1. Ordered, concrete, actionable steps — the first one should be startable immediately
-
-## Decisions & rationale
-- Decision — why (so the next session does not re-debate it)
-
-## Dead ends / gotchas
-- Approaches tried that failed and why; traps to avoid
-
-## Key files
-- `path/to/file` — role
-
-## Useful commands
-- `command` — what it does
-
-## Open questions
-- Things that need the user's input
-```
-
-## Rules
-
-- Be specific: exact paths, function names, error messages, commands.
-- Make every reference self-contained: name the file, command, or decision itself, since the reader never saw this chat.
-- Never include secrets (API keys, tokens, passwords); redact them as `<redacted>`.
-- Keep it concise — aim for something readable in under a minute.
-
-After writing, tell the user the file path and give a 2–3 line summary of what was recorded.
+If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
