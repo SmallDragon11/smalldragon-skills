@@ -12,8 +12,7 @@ Write a handoff file that lets a fresh session (with zero memory of this convers
 ## Location
 
 - Target file: `.claude/PROGRESS.md` under the current working directory (the project root).
-- Create the `.claude/` directory if it does not exist.
-- If the file already exists, Read it first. Rewrite it as one up-to-date document: merge still-relevant content, drop what is obsolete. Do not append session after session.
+- If the file already exists, Read it first. Rewrite it as one up-to-date document: merge still-relevant content, drop what is obsolete.
 
 ## Gather facts first
 
@@ -21,6 +20,7 @@ Before writing, collect concrete state instead of relying on recollection alone:
 - If this is a git repo: `git status --short`, `git diff --stat`, `git log --oneline -10`, current branch.
 - Files created or modified during this session (from the conversation).
 - Any commands needed to build / run / test that were used this session.
+- The user's note, if one was supplied with the invocation (`$ARGUMENTS` in Claude Code, or any text given alongside it): fold it into the relevant section.
 
 ## Content
 
@@ -64,10 +64,9 @@ What we are trying to achieve overall, and the definition of done.
 
 ## Rules
 
-- Be specific: exact paths, function names, error messages, commands. Avoid vague phrases like "fixed some bugs".
-- Write for a reader with no context; do not reference "above" or "earlier in the chat".
-- Never include secrets (API keys, tokens, passwords).
+- Be specific: exact paths, function names, error messages, commands.
+- Make every reference self-contained: name the file, command, or decision itself, since the reader never saw this chat.
+- Never include secrets (API keys, tokens, passwords); redact them as `<redacted>`.
 - Keep it concise — aim for something readable in under a minute.
-- If the user supplied a note when invoking this skill (`$ARGUMENTS` in Claude Code, or any text given alongside the invocation), incorporate it in the relevant section.
 
 After writing, tell the user the file path and give a 2–3 line summary of what was recorded.

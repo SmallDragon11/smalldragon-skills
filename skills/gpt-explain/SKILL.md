@@ -8,7 +8,7 @@ allowed-tools: Bash(codex exec:*), Write
 
 # GPT Explain
 
-The user wants a second explanation written by Codex (GPT), because they sometimes find its style easier to follow. Your job is to package the right context, hand it to Codex, and show Codex's answer. **Do not write the explanation yourself.**
+The user wants a second explanation written by Codex (GPT), because they sometimes find its style easier to follow. Your job is to package the right context, hand it to Codex, and show Codex's answer. **Codex is the only author of the explanation.**
 
 ## 1. Decide the mode
 
@@ -49,7 +49,7 @@ They found the original explanation hard to follow and want a clearer one from y
 - Reply in <the language the user has been using in this session, e.g. Traditional Chinese (繁體中文)>.
 - Start from the big picture, then the details. Use plain language, short paragraphs, and concrete examples or analogies.
 - Explain jargon the first time it appears.
-- You may read files in the current directory if it helps, but do not modify anything.
+- You may read files in the current directory if it helps.
 - If something in the material looks wrong, say so explicitly.
 ```
 
@@ -69,14 +69,13 @@ codex exec --sandbox read-only --ephemeral --skip-git-repo-check --color never \
 ```
 
 - `-` reads the prompt from stdin; `-o` writes only Codex's final answer to the file.
-- `--sandbox read-only` lets Codex inspect project files but never change them.
 - Set a generous timeout (e.g. 300000 ms); Codex can take a minute or two.
 - Codex may print unrelated warnings to stderr (MCP/OAuth noise, etc.). Ignore them if the exit code is 0 and the answer file is non-empty.
 
-If `codex` is not installed or not logged in, tell the user (`npm i -g @openai/codex`, then `codex login`) and stop. Do not fall back to explaining it yourself.
+If `codex` is not installed or not logged in, tell the user (`npm i -g @openai/codex`, then `codex login`) and stop.
 
 ## 4. Show the answer
 
-Read the answer file and present it to the user **as-is**, under a heading such as `## GPT 的解釋` (in the user's language). Do not rewrite, shorten, or "improve" it.
+Read the answer file and present it to the user **verbatim**, under a heading such as `## GPT 的解釋` (in the user's language).
 
 After it, you may add at most one or two short lines only if Codex said something factually wrong or contradicts what happened in the session. Otherwise add nothing.
