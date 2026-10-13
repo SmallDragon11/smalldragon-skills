@@ -1,6 +1,6 @@
 {
   "name": "smalldragon-skills",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Personal Claude Code skills by SmallDragon11, including session progress save/load and GPT (Codex) explanations.",
   "author": {
     "name": "SmallDragon11"
